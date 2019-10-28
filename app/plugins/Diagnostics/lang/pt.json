@@ -1,9 +1,0 @@
-{
-    "Diagnostics": {
-        "ConfigFileTitle": "Ficheiro de configuração",
-        "MysqlMaxPacketSize": "Tamanho máximo do pacote",
-        "MysqlMaxPacketSizeWarning": "É recomendável a configuração de um tamanho de pacote 'max_allowed_packet' na sua base de dados MySQL de, pelo menos, %1$s. Atualmente está configurado como %2$s.",
-        "HideUnchanged": "Se quiser ver apenas os valores alterados, pode %1$socultar todos os valores inalterados%2$s.",
-        "Sections": "Secções"
-    }
-}

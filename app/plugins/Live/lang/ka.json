@@ -1,8 +1,0 @@
-{
-    "Live": {
-        "GoalType": "ტიპი",
-        "LastHours": "ბოლო %s საათი",
-        "LastMinutes": "ბოლო %s წუთი",
-        "Referrer_URL": "რეფერერის URL"
-    }
-}

@@ -35,6 +35,7 @@ return array(
 		return '/'. $paths->get_relative_dir_to_matomo($paths->get_upload_base_dir().'/');
 	},
 	'Piwik\Auth' => DI\object('Piwik\Plugins\WordPress\Auth'),
+	'Piwik\Translation\Translator' => DI\object('Piwik\Plugins\WordPress\Translator'),
 	\Piwik\Config::class => DI\decorate(function ($previous) {
 		/**
 		 * @param \Piwik\Config $previous

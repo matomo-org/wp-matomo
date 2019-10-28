@@ -1,5 +1,6 @@
 {
-    "require": {
-        "phpunit/phpunit": "5.*"
+    "require-dev": {
+        "phpunit/phpunit": "5.*",
+        "gettext/gettext": "^4.7"
     }
 }

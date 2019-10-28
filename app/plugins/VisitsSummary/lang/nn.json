@@ -1,9 +1,0 @@
-{
-    "VisitsSummary": {
-        "GenerateQueries": "%s spørjingar køyrd",
-        "GenerateTime": "%s sekundar å generera denne siden",
-        "WidgetLastVisits": "Siste vitjingar",
-        "WidgetOverviewGraph": "Oversikt med graf",
-        "WidgetVisits": "Vitjingsoversikt"
-    }
-}
