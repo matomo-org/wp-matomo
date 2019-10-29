@@ -49,7 +49,7 @@ class Bootstrap {
 		}
 
 		if ( ! defined( 'PIWIK_DOCUMENT_ROOT' ) ) {
-			define( 'PIWIK_DOCUMENT_ROOT', dirname( __FILE__ ) == '/' ? '' : dirname( __FILE__ ) . '/../../app' );
+			define( 'PIWIK_DOCUMENT_ROOT', plugin_dir_path(MATOMO_ANALYTICS_FILE) . 'app' );
 		}
 
 		if ( file_exists( PIWIK_DOCUMENT_ROOT . '/../matomo_bootstrap.php' ) ) {
@@ -91,5 +91,25 @@ class Bootstrap {
 	public static function do_bootstrap() {
 		$bootstrap = new Bootstrap();
 		$bootstrap->bootstrap();
+	}
+
+	/**
+	 * Autoload Matomo classes without actually bootstrapping Matomo. This can be useful if you want to avoid
+	 * bootstrapping the entire Matomo just to execute one or two classes that actually don't require Matomo to be
+	 * bootstrapped. Eg when they only handle some logic around arrays etc.
+	 *
+	 * Using this method makes WP faster and also more stable not risking Matomo could break or slow down the current
+	 * request. Only use it though with care cause if the class is being changed then your plugin may break if it
+	 * suddenly requires dependencies to Matomo
+	 */
+	public static function autoload_matomo() {
+		require_once plugin_dir_path(MATOMO_ANALYTICS_FILE) . 'app/vendor/autoload.php';
+
+		if (!empty($GLOBALS['MATOMO_PLUGIN_DIRS'])) {
+			$extraDirs = array_map(function ($dir) {
+				return rtrim($dir['pluginsPathAbsolute'], '/') . '/';
+			}, $GLOBALS['MATOMO_PLUGIN_DIRS']);
+			\Piwik\Plugin\Manager::registerPluginDirAutoload($extraDirs);
+		}
 	}
 }
