@@ -29,6 +29,19 @@ class Auth extends \Piwik\Plugins\Login\Auth
 	            // api authentication using token
 		        return parent::authenticate();
 	        }
+	        // @see https://github.com/matomo-org/matomo-for-wordpress/issues/462
+	        if (!empty($_POST['passwordConfirmation'])) {
+	        	$user = wp_get_current_user();
+	        	$login = $user->user_login;
+	        	$password = $_POST['passwordConfirmation'];
+		         // check if this password is the login's password
+		        $isPasswordCorrect = wp_check_password($password, $user->user_pass, $user->ID);
+		        if ($isPasswordCorrect) {
+		        	return new AuthResult(AuthResult::SUCCESS, $login, '');
+		        } else {
+			        return new AuthResult(AuthResult::FAILURE, $login, '');
+		        }
+	        }
         }
 
         $login = 'anonymous';
