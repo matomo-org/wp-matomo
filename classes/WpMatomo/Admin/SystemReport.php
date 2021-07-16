@@ -61,7 +61,8 @@ class SystemReport {
 		'age-verification-for-woocommerce', // see https://github.com/matomo-org/wp-matomo/issues/428
 		'minify-html-markup', // see https://wordpress.org/support/topic/graphs-are-not-displayed-in-the-visits-overview-widget/#post-14298068
 		'bigbuy-wc-dropshipping-connector', // see https://wordpress.org/support/topic/20-total-errors-during-this-script-execution/
-		'google-listings-and-ads' // see https://wordpress.org/support/topic/20-total-errors-during-this-script-execution/
+		'google-listings-and-ads', // see https://wordpress.org/support/topic/20-total-errors-during-this-script-execution/
+		'accelerated-mobile-pages' // see https://wordpress.org/support/topic/receiving-errors-from-my-plesk-server/
 	);
 
 	private $valid_tabs = array( 'troubleshooting' );
