@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** @var array $containers */
 /** @var array $track_modes */
 /** @var array $matomo_currencies */
-
+/** @var string[] $errors */
 $matomo_form  = new \WpMatomo\Admin\TrackingSettings\Forms( $settings );
 $matomo_paths = new Paths();
 ?>
@@ -32,6 +32,10 @@ $matomo_paths = new Paths();
 if ( $was_updated ) {
 	include 'update_notice_clear_cache.php';
 }
+if ( count( $errors ) ) {
+       include 'settings_errors.php';
+}
+
 ?>
 <form method="post">
 	<?php wp_nonce_field( TrackingSettings::NONCE_NAME ); ?>

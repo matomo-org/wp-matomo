@@ -100,4 +100,19 @@ class AdminTrackingSettingsTest extends MatomoUnit_TestCase {
 		$this->assertSame( array(), $containers );
 	}
 
+	public function test_validate_html_comments() {
+		$html = '<div></div>';
+		$this->assertTrue( $this->tracking_settings->validate_html_comments( $html ) );
+		$html = '<script></script>';
+		$this->assertTrue( $this->tracking_settings->validate_html_comments( $html ) );
+		$html = '<!-- begin comment--><script></script><!-- end comment -->';
+		$this->assertTrue( $this->tracking_settings->validate_html_comments( $html ) );
+		$html = '<!-- begin comment--><script></script>';
+		$this->assertFalse( $this->tracking_settings->validate_html_comments( $html ) );
+		$html = '<!-- begin comment--><script></script><!-- end invalid tag ->';
+		$this->assertFalse( $this->tracking_settings->validate_html_comments( $html ) );
+		$html = '<!-- begin comment--><script></script><!-- valid end --><!-- end invalid tag ->';
+		$this->assertFalse( $this->tracking_settings->validate_html_comments( $html ) );
+	}
+
 }
