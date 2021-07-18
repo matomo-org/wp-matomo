@@ -84,6 +84,7 @@ class TrackingSettings implements AdminSettingsInterface {
 			'limit_cookies',
 			'force_post',
 			'disable_cookies',
+			'cookie_consent',
 			'add_download_extensions',
 			'track_404',
 			'track_search',
@@ -199,10 +200,24 @@ class TrackingSettings implements AdminSettingsInterface {
 
 		$matomo_currencies = $this->get_supported_currencies();
 
+		$cookie_consent_modes = $this->get_cookie_consent_modes();
+
 		$tracking_code_generator      = new TrackingCodeGenerator( $this->settings );
 		$matomo_default_tracking_code = $tracking_code_generator->prepare_tracking_code( $idsite );
 
 		include dirname( __FILE__ ) . '/views/tracking.php';
+	}
+
+	/**
+	 * @return string[]
+	 */
+	private function get_cookie_consent_modes()
+	{
+		$modes = [];
+		foreach(CookieConsent::get_available_options() as $option => $description) {
+			$modes[$option] = $description;
+		}
+		return $modes;
 	}
 
 	private function get_supported_currencies()

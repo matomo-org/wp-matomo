@@ -13,6 +13,7 @@
 
 namespace WpMatomo;
 
+use WpMatomo\Admin\CookieConsent;
 use WpMatomo\Admin\TrackingSettings;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -87,6 +88,7 @@ class Settings {
 		'version_history'                          => array(),
 		'mail_history'                             => array(),
 		'disable_cookies'                          => false,
+		'cookie_consent'                           => CookieConsent::REQUIRE_NONE,
 		'force_post'                               => false,
 		'limit_cookies'                            => false,
 		'limit_cookies_visitor'                    => 34186669, // Matomo default 13 months

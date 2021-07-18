@@ -10,6 +10,7 @@
 namespace WpMatomo\TrackingCode;
 
 use WpMatomo\Admin\TrackingSettings;
+use WpMatomo\Admin\CookieConsent;
 use WpMatomo\Logger;
 use WpMatomo\Paths;
 use WpMatomo\Settings;
@@ -268,6 +269,14 @@ g.type=\'text/javascript\'; g.async=true; g.src="' . $container_url . '"; s.pare
 		if ( $this->settings->get_global_option( 'force_post' ) ) {
 			$options[] = "_paq.push(['setRequestMethod', 'POST']);";
 		}
+
+		$cookieConsent = new CookieConsent();
+		$cookie_consent_option = $cookieConsent->get_tracking_consent_option( $this->settings->get_global_option( 'cookie_consent' ) );
+		// for unit test cases
+		if ( ! empty( $cookie_consent_option ) ) {
+			$options[] = $cookie_consent_option;
+		}
+
 		if ( $this->settings->get_global_option( 'limit_cookies' ) ) {
 			$options[] = "_paq.push(['setVisitorCookieTimeout', " . wp_json_encode( $this->settings->get_global_option( 'limit_cookies_visitor' ) ) . ']);';
 			$options[] = "_paq.push(['setSessionCookieTimeout', " . wp_json_encode( $this->settings->get_global_option( 'limit_cookies_session' ) ) . ']);';
@@ -286,6 +295,7 @@ g.type=\'text/javascript\'; g.async=true; g.src="' . $container_url . '"; s.pare
 		if ( $this->settings->get_global_option( 'track_datacfasync' ) ) {
 			$data_cf_async = 'data-cfasync="false"';
 		}
+
 
 		$script  = '<!-- Matomo -->';
 		$script .= '<script ' . $data_cf_async . ' >';
